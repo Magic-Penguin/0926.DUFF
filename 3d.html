@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Week 4 — My 3D view</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <a class="back-link" href="index.html">← Return to Duff Beer site</a>
+    <h1>My 3D view</h1>
+    <p id="scene-description">A sphere stands on a flat ground plane. Replace this description with an accurate explanation of your customized scene.</p>
+    <p id="scene-status" role="status">Loading the scene…</p>
+    <canvas id="renderCanvas" tabindex="0" aria-label="Interactive 3D practice scene" aria-describedby="scene-description scene-controls">The practice scene contains a sphere and a ground plane.</canvas>
+    <p id="scene-controls">Drag in the scene to look around. With the scene focused, use the arrow keys to move the camera. Press Tab to leave the scene. The Reset view button restores the starting camera.</p>
+    <button id="reset-view" type="button" disabled>Reset view</button>
+    <noscript><p>JavaScript is disabled. Enable it to run the coding exercise, or ask your instructor for the supported lab route. The written scene description remains available.</p></noscript>
+  </main>
+  <!-- The canvas exists before the engine and your script load. -->
+  <script src="babylon.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
