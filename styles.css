@@ -229,12 +229,16 @@ button{
   position:relative;
   z-index:1;
   display:grid;
-  place-items:center
+  place-items:center;
+  perspective:1200px;
+  animation:canFloat 3s ease-in-out infinite
 }
 .can{
   width:min(280px,55vw);
   height:480px;
-  animation:float 3s ease-in-out infinite;
+  transform-style:preserve-3d;
+  transform-origin:center center;
+  animation:canSpin 16s linear infinite;
   filter:drop-shadow(18px 20px 0 rgba(0,0,0,.15))
 }
 .can-top,.can-bottom{
