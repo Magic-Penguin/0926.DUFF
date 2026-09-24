@@ -287,9 +287,17 @@ button{
 .can-bottom{
   border-radius:20% 20% 50% 50%
 }
-@keyframes float{
+@keyframes canSpin{
+  from{
+    transform:rotateY(0deg) rotateZ(-1deg)
+  }
+  to{
+    transform:rotateY(360deg) rotateZ(-1deg)
+  }
+}
+@keyframes canFloat{
   50%{
-    transform:translateY(-12px) rotate(2deg)
+    transform:translateY(-12px)
   }
 }
 .content-section{
