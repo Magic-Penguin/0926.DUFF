@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       new BABYLON.Vector3(0, 1, 0),
       scene
     );
-    ambient.intensity = 1.15;
+    ambient.intensity = 1.55;
 
     const key = new BABYLON.DirectionalLight(
       "duffKey",
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scene
     );
     key.position = new BABYLON.Vector3(4, 6, -8);
-    key.intensity = 2.1;
+    key.intensity = 3.0;
 
     const rim = new BABYLON.PointLight(
       "duffRim",
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scene
     );
     rim.diffuse = new BABYLON.Color3(1, 0.32, 0.22);
-    rim.intensity = 12;
+    rim.intensity = 15;
 
     const fill = new BABYLON.PointLight(
       "duffFill",
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scene
     );
     fill.diffuse = new BABYLON.Color3(1, 0.65, 0.55);
-    fill.intensity = 7;
+    fill.intensity = 10;
 
     /*
      * Main can body.
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     canMaterial.diffuseColor = new BABYLON.Color3(1.0, 0.16, 0.18);
-    canMaterial.emissiveColor = new BABYLON.Color3(0.16, 0.01, 0.015);
+    canMaterial.emissiveColor = new BABYLON.Color3(0.22, 0.025, 0.03);
     canMaterial.specularColor = new BABYLON.Color3(1, 1, 1);
     canMaterial.specularPower = 96;
 
@@ -249,6 +249,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     let rotation = 0;
+    let bounceTime = 0;
+    let introComplete = false;
+    const introDuration = 1200;
+    const startY = -2.8;
+    const finalY = 0;
+
+    canRoot.position.y = startY;
+    canRoot.scaling.setAll(0.82);
 
     function resize() {
       engine.resize();
@@ -260,7 +268,32 @@ document.addEventListener("DOMContentLoaded", () => {
     resize();
 
     engine.runRenderLoop(() => {
-      rotation += engine.getDeltaTime() * (Math.PI * 2 / 16000);
+      const dt = engine.getDeltaTime();
+      bounceTime += dt;
+
+      // Dramatic entrance: rise quickly, overshoot, then settle with a small bounce.
+      if (!introComplete) {
+        const t = Math.min(bounceTime / introDuration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const bounce = Math.sin(t * Math.PI * 3) * (1 - t) * 0.55;
+        canRoot.position.y = BABYLON.Scalar.Lerp(startY, finalY, eased) + bounce;
+
+        const scale = 0.82 + (0.18 * eased) + (Math.sin(t * Math.PI * 3) * (1 - t) * 0.035);
+        canRoot.scaling.setAll(scale);
+
+        // Begin the 360 while the can is landing so the entrance feels continuous.
+        rotation += dt * (Math.PI * 2 / 9000);
+
+        if (t >= 1) {
+          introComplete = true;
+          canRoot.position.y = finalY;
+          canRoot.scaling.setAll(1);
+        }
+      } else {
+        // Smooth full 360 rotation after the entrance.
+        rotation += dt * (Math.PI * 2 / 12000);
+      }
+
       canRoot.rotation.y = rotation;
       scene.render();
     });
