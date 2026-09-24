@@ -46,36 +46,32 @@ document.addEventListener("DOMContentLoaded", () => {
     camera.upperBetaLimit = Math.PI / 2;
     camera.fov = 0.72;
 
+    // Soft studio lighting matched to the site's flat yellow/red/black palette.
+    // Avoiding colored point lights keeps the can from looking pasted into the page.
     const ambient = new BABYLON.HemisphericLight(
       "duffAmbient",
       new BABYLON.Vector3(0, 1, 0),
       scene
     );
-    ambient.intensity = 1.8;
+    ambient.intensity = 1.35;
+    ambient.diffuse = new BABYLON.Color3(1, 0.96, 0.9);
+    ambient.groundColor = new BABYLON.Color3(0.32, 0.25, 0.18);
 
     const key = new BABYLON.DirectionalLight(
       "duffKey",
-      new BABYLON.Vector3(-0.5, -1, -1),
+      new BABYLON.Vector3(-0.35, -0.2, -1),
       scene
     );
-    key.position = new BABYLON.Vector3(3, 5, -10);
-    key.intensity = 2.2;
+    key.intensity = 1.15;
+    key.diffuse = new BABYLON.Color3(1, 0.9, 0.78);
 
-    const rim = new BABYLON.PointLight(
-      "duffRim",
-      new BABYLON.Vector3(-3, 0.5, 6),
-      scene
-    );
-    rim.diffuse = new BABYLON.Color3(1, 0.32, 0.22);
-    rim.intensity = 5;
-
-    const fill = new BABYLON.PointLight(
+    const fill = new BABYLON.DirectionalLight(
       "duffFill",
-      new BABYLON.Vector3(3, 1, -6),
+      new BABYLON.Vector3(0.65, -0.1, 0.8),
       scene
     );
-    fill.diffuse = new BABYLON.Color3(1, 0.65, 0.55);
-    fill.intensity = 4;
+    fill.intensity = 0.5;
+    fill.diffuse = new BABYLON.Color3(1, 0.82, 0.68);
 
     /*
      * Main can body.
@@ -95,10 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
       scene
     );
 
-    canMaterial.diffuseColor = new BABYLON.Color3(1.0, 0.16, 0.18);
-    canMaterial.emissiveColor = new BABYLON.Color3(0.22, 0.025, 0.03);
-    canMaterial.specularColor = new BABYLON.Color3(1, 1, 1);
-    canMaterial.specularPower = 180;
+    canMaterial.diffuseColor = new BABYLON.Color3(0.94, 0.055, 0.075);
+    canMaterial.emissiveColor = new BABYLON.Color3(0.08, 0.008, 0.012);
+    canMaterial.specularColor = new BABYLON.Color3(0.72, 0.72, 0.72);
+    canMaterial.specularPower = 220;
 
     /*
      * Duff label texture painted directly onto the cylinder.
@@ -170,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const metal = new BABYLON.StandardMaterial("duffMetal", scene);
     metal.diffuseColor = new BABYLON.Color3(0.86, 0.86, 0.86);
     metal.specularColor = new BABYLON.Color3(1, 1, 1);
-    metal.specularPower = 128;
+    metal.specularPower = 180;
 
     const top = BABYLON.MeshBuilder.CreateCylinder(
       "duffCanTop",
