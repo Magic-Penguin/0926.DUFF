@@ -1,72 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="DUFF BEER connection site — a fictional fan-made website concept."><title>DUFF BEER | Connection Site</title><link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="DUFF BEER connection site — a fictional fan-made website concept."
+  >
+  <title>DUFF BEER | Connection Site</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <div id="ageGate" class="age-gate" aria-modal="true" role="dialog" aria-labelledby="ageTitle"><div class="age-card"><div class="mini-bottle" aria-hidden="true"><span class="mini-label">Duff</span></div><div class="logo-pill">DUFF BEER</div><p class="eyebrow">CONNECTION SITE</p><h1 id="ageTitle">Are you 21 years or older?</h1><p class="age-copy">You must be 21 or older to enter this site.</p><div class="age-buttons"><button id="yesBtn" class="btn btn-yes" type="button">YES</button><button id="noBtn" class="btn btn-no" type="button">NO</button></div><p id="ageMessage" class="age-message" aria-live="polite"></p></div></div>
+  <div
+    id="ageGate"
+    class="age-gate"
+    aria-modal="true"
+    role="dialog"
+    aria-labelledby="ageTitle"
+  >
+    <div class="age-card">
+      <div class="mini-bottle" aria-hidden="true">
+        <span class="mini-label">Duff</span>
+      </div>
+
+      <div class="logo-pill">DUFF BEER</div>
+      <p class="eyebrow">CONNECTION SITE</p>
+
+      <h1 id="ageTitle">Are you 21 years or older?</h1>
+      <p class="age-copy">You must be 21 or older to enter this site.</p>
+
+      <div class="age-buttons">
+        <button id="yesBtn" class="btn btn-yes" type="button">YES</button>
+        <button id="noBtn" class="btn btn-no" type="button">NO</button>
+      </div>
+
+      <p id="ageMessage" class="age-message" aria-live="polite"></p>
+    </div>
+  </div>
 
   <div id="site" class="site" hidden>
-    <header class="site-header"><a class="brand" href="#home" aria-label="Duff Beer home"><span class="brand-bottle" aria-hidden="true">D</span><span class="brand-logo">DUFF BEER</span></a><nav class="nav" id="mainNav" aria-label="Main navigation"><a href="#home">Home</a><a href="#products">Products</a><a href="#sponsors">Sponsors</a><a href="#merch">Merch</a><a href="#story">Our Story</a><a href="3d.html">3D Experience</a></nav><button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false">☰</button></header>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Duff Beer home">
+        <span class="brand-bottle" aria-hidden="true">D</span>
+        <span class="brand-logo">DUFF BEER</span>
+      </a>
+
+      <nav class="nav" id="mainNav" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#sponsors">Sponsors</a>
+        <a href="#merch">Merch</a>
+        <a href="#story">Our Story</a>
+        <a href="3d.html">3D Experience</a>
+      </nav>
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+    </header>
 
     <main>
-      <section id="home" class="hero"><div class="hero-copy"><p class="eyebrow">WELCOME TO THE CONNECTION SITE</p><h2>DUFF<br><span>BEER</span></h2><p class="tagline">The Beer for Everyone.</p><p class="subtag">Great taste. Good times. Duff.</p><a class="btn hero-btn" href="#products">EXPLORE DUFF</a></div><div class="can-stage" aria-label="Decorative Duff can"><div class="can"><div class="can-top"></div><div class="can-body"><div class="can-word">Duff</div><div class="can-beer">BEER</div></div><div class="can-bottom"></div></div></div></section>
+      <section id="home" class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">WELCOME TO THE CONNECTION SITE</p>
 
-      <section id="products" class="content-section products-section"><div class="section-heading"><p class="eyebrow">THE DUFF LINEUP</p><h2>Featured Products</h2><p>Explore the fictional Duff lineup and classic brand designs.</p></div><div class="cards">
-        <article class="card" data-title="Duff Classic" data-copy="The iconic original Duff can design."><div class="product-art can-small"><img src="duff-classic.svg" alt="Duff Classic can"></div><h3>DUFF CLASSIC</h3><p>The iconic original can design.</p><button class="card-link" type="button" data-modal="product">VIEW PRODUCT →</button></article>
-        <article class="card" data-title="Duff 6-Pack" data-copy="A classic fictional six-pack concept for the collection."><div class="product-art six-pack"><img src="duff-sixpack.svg" alt="Duff six-pack"></div><h3>DUFF 6-PACK</h3><p>A classic pack for the collection.</p><button class="card-link" type="button" data-modal="product">VIEW PRODUCT →</button></article>
-        <article class="card" id="merch" data-title="Duff T-Shirt" data-copy="Retro-inspired Duff fan merchandise concept."><div class="product-art shirt-art"><img src="duff-shirt.svg" alt="Duff T-shirt"></div><h3>DUFF T-SHIRT</h3><p>Retro-inspired Duff fan merchandise.</p><button class="card-link" type="button" data-modal="merch">VIEW MERCH →</button></article>
-        <article class="card" data-title="Duff Hat" data-copy="A simple red-and-black Duff cap concept."><div class="product-art hat-art"><img src="duff-hat.svg" alt="Duff hat"></div><h3>DUFF HAT</h3><p>A simple red-and-black Duff cap.</p><button class="card-link" type="button" data-modal="merch">VIEW MERCH →</button></article>
-      </div></section>
+          <h2>
+            DUFF<br>
+            <span>BEER</span>
+          </h2>
 
-      <section id="sponsors" class="split-section"><div><p class="eyebrow">PARTNERS</p><h2>Our Sponsors</h2><p>Interested in being part of the Duff connection? This demo section is ready for sponsor logos and partner information.</p></div><div class="sponsor-boxes"><button type="button" data-sponsor="SPONSOR">SPONSOR</button><button type="button" data-sponsor="PARTNER">PARTNER</button><button type="button" data-sponsor="COLLAB">COLLAB</button></div></section>
-      <section id="story" class="story-section"><div class="story-card"><p class="eyebrow">ABOUT DUFF</p><h2>Our Story</h2><p>DUFF BEER is a fictional brand from <em>The Simpsons</em>. This fan-made connection site is a web design project inspired by the bold yellow, red, black, and hand-drawn style of the reference sketch.</p><p class="small-note">This is a fictional fan-site concept and does not sell or distribute alcohol.</p></div><aside class="newsletter"><p class="eyebrow">STAY IN THE LOOP</p><h2>Get the Newsletter</h2><p>Sign up for fictional Duff site updates.</p><form onsubmit="event.preventDefault();document.getElementById('signupMessage').textContent='Thanks! You are signed up for this demo.';"><input type="email" placeholder="Your email" aria-label="Your email" required><button class="btn" type="submit">SIGN UP</button></form><p id="signupMessage" class="age-message" aria-live="polite"></p></aside></section>
+          <p class="tagline">The Beer for Everyone.</p>
+          <p class="subtag">Great taste. Good times. Duff.</p>
+
+          <a class="btn hero-btn" href="#products">EXPLORE DUFF</a>
+        </div>
+
+        <div class="can-stage" aria-label="Decorative Duff can">
+          <div class="can">
+            <div class="can-top"></div>
+
+            <div class="can-body">
+              <div class="can-word">Duff</div>
+              <div class="can-beer">BEER</div>
+            </div>
+
+            <div class="can-bottom"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="products" class="content-section products-section">
+        <div class="section-heading">
+          <p class="eyebrow">THE DUFF LINEUP</p>
+          <h2>Featured Products</h2>
+          <p>Explore the fictional Duff lineup and classic brand designs.</p>
+        </div>
+
+        <div class="cards">
+          <article
+            class="card"
+            data-title="Duff Classic"
+            data-copy="The iconic original Duff can design."
+          >
+            <div class="product-art can-small">
+              <img src="duff-classic.svg" alt="Duff Classic can">
+            </div>
+
+            <h3>DUFF CLASSIC</h3>
+            <p>The iconic original can design.</p>
+
+            <button
+              class="card-link"
+              type="button"
+              data-modal="product"
+            >
+              VIEW PRODUCT →
+            </button>
+          </article>
+
+          <article
+            class="card"
+            data-title="Duff 6-Pack"
+            data-copy="A classic fictional six-pack concept for the collection."
+          >
+            <div class="product-art six-pack">
+              <img src="duff-sixpack.svg" alt="Duff six-pack">
+            </div>
+
+            <h3>DUFF 6-PACK</h3>
+            <p>A classic pack for the collection.</p>
+
+            <button
+              class="card-link"
+              type="button"
+              data-modal="product"
+            >
+              VIEW PRODUCT →
+            </button>
+          </article>
+
+          <article
+            class="card"
+            id="merch"
+            data-title="Duff T-Shirt"
+            data-copy="Retro-inspired Duff fan merchandise concept."
+          >
+            <div class="product-art shirt-art">
+              <img src="duff-shirt.svg" alt="Duff T-shirt">
+            </div>
+
+            <h3>DUFF T-SHIRT</h3>
+            <p>Retro-inspired Duff fan merchandise.</p>
+
+            <button
+              class="card-link"
+              type="button"
+              data-modal="merch"
+            >
+              VIEW MERCH →
+            </button>
+          </article>
+
+          <article
+            class="card"
+            data-title="Duff Hat"
+            data-copy="A simple red-and-black Duff cap concept."
+          >
+            <div class="product-art hat-art">
+              <img src="duff-hat.svg" alt="Duff hat">
+            </div>
+
+            <h3>DUFF HAT</h3>
+            <p>A simple red-and-black Duff cap.</p>
+
+            <button
+              class="card-link"
+              type="button"
+              data-modal="merch"
+            >
+              VIEW MERCH →
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <section id="sponsors" class="split-section">
+        <div>
+          <p class="eyebrow">PARTNERS</p>
+          <h2>Our Sponsors</h2>
+          <p>
+            Interested in being part of the Duff connection? This demo section
+            is ready for sponsor logos and partner information.
+          </p>
+        </div>
+
+        <div class="sponsor-boxes">
+          <button type="button" data-sponsor="SPONSOR">SPONSOR</button>
+          <button type="button" data-sponsor="PARTNER">PARTNER</button>
+          <button type="button" data-sponsor="COLLAB">COLLAB</button>
+        </div>
+      </section>
+
+      <section id="story" class="story-section">
+        <div class="story-card">
+          <p class="eyebrow">ABOUT DUFF</p>
+          <h2>Our Story</h2>
+
+          <p>
+            DUFF BEER is a fictional brand from <em>The Simpsons</em>.
+            This fan-made connection site is a web design project inspired
+            by the bold yellow, red, black, and hand-drawn style of the
+            reference sketch.
+          </p>
+
+          <p class="small-note">
+            This is a fictional fan-site concept and does not sell or
+            distribute alcohol.
+          </p>
+        </div>
+
+        <aside class="newsletter">
+          <p class="eyebrow">STAY IN THE LOOP</p>
+          <h2>Get the Newsletter</h2>
+          <p>Sign up for fictional Duff site updates.</p>
+
+          <form
+            onsubmit="event.preventDefault(); document.getElementById('signupMessage').textContent='Thanks! You are signed up for this demo.';"
+          >
+            <input
+              type="email"
+              placeholder="Your email"
+              aria-label="Your email"
+              required
+            >
+            <button class="btn" type="submit">SIGN UP</button>
+          </form>
+
+          <p
+            id="signupMessage"
+            class="age-message"
+            aria-live="polite"
+          ></p>
+        </aside>
+      </section>
     </main>
 
-    <div class="site-modal" id="siteModal" hidden aria-modal="true" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalCopy">
+    <div
+      class="site-modal"
+      id="siteModal"
+      hidden
+      aria-modal="true"
+      role="dialog"
+      aria-labelledby="modalTitle"
+      aria-describedby="modalCopy"
+    >
       <div class="modal-card">
-        <div class="modal-banner" id="modalBanner"><span id="modalBadge">DUFF</span><span id="modalDots">● ● ●</span></div>
-        <button class="modal-close" id="modalClose" type="button" aria-label="Close popup">×</button>
-        <p class="eyebrow" id="modalEyebrow">DUFF CONNECTION</p><h2 id="modalTitle">Duff</h2><p id="modalCopy">Explore the fictional Duff experience.</p>
+        <div class="modal-banner" id="modalBanner">
+          <span id="modalBadge">DUFF</span>
+          <span id="modalDots">● ● ●</span>
+        </div>
+
+        <button
+          class="modal-close"
+          id="modalClose"
+          type="button"
+          aria-label="Close popup"
+        >
+          ×
+        </button>
+
+        <p class="eyebrow" id="modalEyebrow">DUFF CONNECTION</p>
+        <h2 id="modalTitle">Duff</h2>
+        <p id="modalCopy">Explore the fictional Duff experience.</p>
+
         <div class="modal-facts" id="modalFacts"></div>
-        <div class="modal-trivia"><span>🍩</span><div><strong>SPRINGFIELD TRIVIA</strong><p id="modalTrivia">Loading Duff trivia...</p></div></div>
-        <a class="btn modal-action" id="modalAction" href="#products">BACK TO PRODUCTS</a>
+
+        <div class="modal-trivia">
+          <span>🍩</span>
+
+          <div>
+            <strong>SPRINGFIELD TRIVIA</strong>
+            <p id="modalTrivia">Loading Duff trivia...</p>
+          </div>
+        </div>
+
+        <a
+          class="btn modal-action"
+          id="modalAction"
+          href="#products"
+        >
+          BACK TO PRODUCTS
+        </a>
       </div>
     </div>
 
-    <footer><strong>DUFF BEER</strong><span>Connection Site • Fan-made web design project</span><a href="#home">BACK TO TOP ↑</a></footer>
+    <footer>
+      <strong>DUFF BEER</strong>
+      <span>Connection Site • Fan-made web design project</span>
+      <a href="#home">BACK TO TOP ↑</a>
+    </footer>
   </div>
 
   <script>
-    const gate=document.getElementById('ageGate'),menuButton=document.getElementById('menuButton'),mainNav=document.getElementById('mainNav'),modal=document.getElementById('siteModal'),modalClose=document.getElementById('modalClose'),modalTitle=document.getElementById('modalTitle'),modalCopy=document.getElementById('modalCopy'),modalEyebrow=document.getElementById('modalEyebrow'),modalAction=document.getElementById('modalAction'),modalFacts=document.getElementById('modalFacts'),modalTrivia=document.getElementById('modalTrivia'),site=document.getElementById('site'),yesBtn=document.getElementById('yesBtn'),noBtn=document.getElementById('noBtn'),message=document.getElementById('ageMessage');
-    const productInfo={
-      "Duff Classic":{eyebrow:"DUFF PRODUCT",facts:["The signature red-and-white Duff look","Duff first appeared in The Simpsons in the series' early seasons","Homer is famously associated with the brand"],trivia:"Duff is a fictional beer brand created for The Simpsons and is closely tied to Springfield's satirical corporate world."},
-      "Duff 6-Pack":{eyebrow:"DUFF PRODUCT",facts:["Six-can fictional collector design","Inspired by the show's recurring Duff branding","Part of the Springfield beverage universe"],trivia:"Duff has appeared in many forms throughout the series, including cans, bottles, advertising, and fictional Duff-related businesses."},
-      "Duff T-Shirt":{eyebrow:"DUFF MERCH",facts:["Retro Duff fan-wear concept","Bold logo treatment inspired by the show","Designed as fictional merchandise"],trivia:"Duff merchandise and advertising are recurring visual jokes in The Simpsons, often extending the brand beyond the beer itself."},
-      "Duff Hat":{eyebrow:"DUFF MERCH",facts:["Red-and-black cap concept","Classic Duff 'D' badge","Designed as fictional fan merchandise"],trivia:"The Duff logo is one of the show's recognizable fictional brand marks and is repeatedly used as a visual shorthand for Springfield's beer culture."}
+    const gate = document.getElementById("ageGate");
+    const menuButton = document.getElementById("menuButton");
+    const mainNav = document.getElementById("mainNav");
+    const modal = document.getElementById("siteModal");
+    const modalClose = document.getElementById("modalClose");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalCopy = document.getElementById("modalCopy");
+    const modalEyebrow = document.getElementById("modalEyebrow");
+    const modalAction = document.getElementById("modalAction");
+    const modalFacts = document.getElementById("modalFacts");
+    const modalTrivia = document.getElementById("modalTrivia");
+    const site = document.getElementById("site");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const message = document.getElementById("ageMessage");
+
+    const productInfo = {
+      "Duff Classic": {
+        eyebrow: "DUFF PRODUCT",
+        facts: [
+          "The signature red-and-white Duff look",
+          "Duff first appeared in The Simpsons in the series' early seasons",
+          "Homer is famously associated with the brand"
+        ],
+        trivia:
+          "Duff is a fictional beer brand created for The Simpsons and is closely tied to Springfield's satirical corporate world."
+      },
+
+      "Duff 6-Pack": {
+        eyebrow: "DUFF PRODUCT",
+        facts: [
+          "Six-can fictional collector design",
+          "Inspired by the show's recurring Duff branding",
+          "Part of the Springfield beverage universe"
+        ],
+        trivia:
+          "Duff has appeared in many forms throughout the series, including cans, bottles, advertising, and fictional Duff-related businesses."
+      },
+
+      "Duff T-Shirt": {
+        eyebrow: "DUFF MERCH",
+        facts: [
+          "Retro Duff fan-wear concept",
+          "Bold logo treatment inspired by the show",
+          "Designed as fictional merchandise"
+        ],
+        trivia:
+          "Duff merchandise and advertising are recurring visual jokes in The Simpsons, often extending the brand beyond the beer itself."
+      },
+
+      "Duff Hat": {
+        eyebrow: "DUFF MERCH",
+        facts: [
+          "Red-and-black cap concept",
+          "Classic Duff 'D' badge",
+          "Designed as fictional fan merchandise"
+        ],
+        trivia:
+          "The Duff logo is one of the show's recognizable fictional brand marks and is repeatedly used as a visual shorthand for Springfield's beer culture."
+      }
     };
-    function enterSite(){sessionStorage.setItem('duffAgeVerified','true');gate.hidden=true;site.hidden=false;window.scrollTo(0,0)}
-    yesBtn.addEventListener('click',enterSite);noBtn.addEventListener('click',()=>{message.textContent='Sorry, you must be 21 or older to enter.';message.classList.add('error')});
-    if(sessionStorage.getItem('duffAgeVerified')==='true'){gate.hidden=true;site.hidden=false}
-    menuButton.addEventListener('click',()=>{document.body.classList.toggle('menu-open');const open=document.body.classList.contains('menu-open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Close menu':'Open menu')});
-    mainNav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>document.body.classList.remove('menu-open')));
-    function lockScroll(){document.body.classList.add('modal-open')}
-    function unlockScroll(){document.body.classList.remove('modal-open')}
-    function openModal(title,copy,eyebrow,actionText,actionHref){
-      const info=productInfo[title];
-      modalTitle.textContent=title;modalCopy.textContent=copy;modalEyebrow.textContent=eyebrow;modalAction.textContent=actionText;modalAction.href=actionHref;
-      modalFacts.innerHTML=(info?info.facts:["Fictional partner placeholder","Use this space for sponsor information","Designed for this fan-made demo"]).map(f=>'<span>✓ '+f+'</span>').join('');
-      modalTrivia.textContent=info?info.trivia:"This is a fictional sponsor area for the Duff fan-site concept.";
-      modal.hidden=false;lockScroll();modalClose.focus();
+
+    function enterSite() {
+      sessionStorage.setItem("duffAgeVerified", "true");
+      gate.hidden = true;
+      site.hidden = false;
+      window.scrollTo(0, 0);
     }
-    document.querySelectorAll('[data-modal]').forEach(button=>button.addEventListener('click',()=>{const card=button.closest('.card');const type=button.dataset.modal;openModal(card.dataset.title,card.dataset.copy,type==='merch'?'DUFF MERCH':'DUFF PRODUCT',type==='merch'?'EXPLORE MERCH':'VIEW PRODUCTS','#products')}));
-    document.querySelectorAll('[data-sponsor]').forEach(button=>button.addEventListener('click',()=>openModal(button.dataset.sponsor,'This is a fictional sponsor placeholder. Use this space for a partner logo, campaign page, or collaboration details.','DUFF PARTNERS','CLOSE & CONTINUE','#sponsors')));
-    function closeModal(){modal.hidden=true;unlockScroll()}
-    modalClose.addEventListener('click',closeModal);
-    modal.addEventListener('click',event=>{if(event.target===modal)closeModal()});
-    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!modal.hidden)closeModal()});
-    modalAction.addEventListener('click',closeModal);
+
+    yesBtn.addEventListener("click", enterSite);
+
+    noBtn.addEventListener("click", () => {
+      message.textContent = "Sorry, you must be 21 or older to enter.";
+      message.classList.add("error");
+    });
+
+    if (sessionStorage.getItem("duffAgeVerified") === "true") {
+      gate.hidden = true;
+      site.hidden = false;
+    }
+
+    menuButton.addEventListener("click", () => {
+      document.body.classList.toggle("menu-open");
+
+      const open = document.body.classList.contains("menu-open");
+
+      menuButton.setAttribute("aria-expanded", String(open));
+      menuButton.setAttribute(
+        "aria-label",
+        open ? "Close menu" : "Open menu"
+      );
+    });
+
+    mainNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        document.body.classList.remove("menu-open");
+      });
+    });
+
+    function lockScroll() {
+      document.body.classList.add("modal-open");
+    }
+
+    function unlockScroll() {
+      document.body.classList.remove("modal-open");
+    }
+
+    function openModal(
+      title,
+      copy,
+      eyebrow,
+      actionText,
+      actionHref
+    ) {
+      const info = productInfo[title];
+
+      modalTitle.textContent = title;
+      modalCopy.textContent = copy;
+      modalEyebrow.textContent = eyebrow;
+      modalAction.textContent = actionText;
+      modalAction.href = actionHref;
+
+      modalFacts.innerHTML = (
+        info
+          ? info.facts
+          : [
+              "Fictional partner placeholder",
+              "Use this space for sponsor information",
+              "Designed for this fan-made demo"
+            ]
+      )
+        .map((fact) => `<span>✓ ${fact}</span>`)
+        .join("");
+
+      modalTrivia.textContent = info
+        ? info.trivia
+        : "This is a fictional sponsor area for the Duff fan-site concept.";
+
+      modal.hidden = false;
+      lockScroll();
+      modalClose.focus();
+    }
+
+    document.querySelectorAll("[data-modal]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const card = button.closest(".card");
+        const type = button.dataset.modal;
+
+        openModal(
+          card.dataset.title,
+          card.dataset.copy,
+          type === "merch" ? "DUFF MERCH" : "DUFF PRODUCT",
+          type === "merch" ? "EXPLORE MERCH" : "VIEW PRODUCTS",
+          "#products"
+        );
+      });
+    });
+
+    document.querySelectorAll("[data-sponsor]").forEach((button) => {
+      button.addEventListener("click", () => {
+        openModal(
+          button.dataset.sponsor,
+          "This is a fictional sponsor placeholder. Use this space for a partner logo, campaign page, or collaboration details.",
+          "DUFF PARTNERS",
+          "CLOSE & CONTINUE",
+          "#sponsors"
+        );
+      });
+    });
+
+    function closeModal() {
+      modal.hidden = true;
+      unlockScroll();
+    }
+
+    modalClose.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !modal.hidden) {
+        closeModal();
+      }
+    });
+
+    modalAction.addEventListener("click", closeModal);
   </script>
 </body>
 </html>
