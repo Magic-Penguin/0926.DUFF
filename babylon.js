@@ -51,31 +51,31 @@ document.addEventListener("DOMContentLoaded", () => {
       new BABYLON.Vector3(0, 1, 0),
       scene
     );
-    ambient.intensity = 1.55;
+    ambient.intensity = 1.8;
 
     const key = new BABYLON.DirectionalLight(
       "duffKey",
       new BABYLON.Vector3(-0.5, -1, -1),
       scene
     );
-    key.position = new BABYLON.Vector3(4, 6, -8);
-    key.intensity = 3.0;
+    key.position = new BABYLON.Vector3(3, 5, -10);
+    key.intensity = 2.2;
 
     const rim = new BABYLON.PointLight(
       "duffRim",
-      new BABYLON.Vector3(-4, 1, 5),
+      new BABYLON.Vector3(-3, 0.5, 6),
       scene
     );
     rim.diffuse = new BABYLON.Color3(1, 0.32, 0.22);
-    rim.intensity = 15;
+    rim.intensity = 5;
 
     const fill = new BABYLON.PointLight(
       "duffFill",
-      new BABYLON.Vector3(4, 2, -4),
+      new BABYLON.Vector3(3, 1, -6),
       scene
     );
     fill.diffuse = new BABYLON.Color3(1, 0.65, 0.55);
-    fill.intensity = 10;
+    fill.intensity = 4;
 
     /*
      * Main can body.
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     canMaterial.diffuseColor = new BABYLON.Color3(1.0, 0.16, 0.18);
     canMaterial.emissiveColor = new BABYLON.Color3(0.22, 0.025, 0.03);
     canMaterial.specularColor = new BABYLON.Color3(1, 1, 1);
-    canMaterial.specularPower = 96;
+    canMaterial.specularPower = 180;
 
     /*
      * Duff label texture painted directly onto the cylinder.
