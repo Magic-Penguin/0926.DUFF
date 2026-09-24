@@ -1,72 +1,260 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+"use strict";
 
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Babylon Template</title>
+/*
+ * DUFF 3D CAN
+ * This file contains the Babylon.js scene for the hero can.
+ * Babylon itself is loaded by index.html before this file.
+ */
 
-        <style>
-            html, body {
-                overflow: hidden;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-            #renderCanvas {
-                width: 100%;
-                height: 100%;
-                touch-action: none;
-            }
-        </style>
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("can3D");
+  const site = document.getElementById("site");
 
-        <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  if (!canvas || typeof BABYLON === "undefined") return;
 
-    </head>
+  let started = false;
 
-   <body>
+  function createDuffCan() {
+    if (started || (site && site.hidden)) return;
+    started = true;
 
-	<canvas id="renderCanvas"></canvas>
+    const engine = new BABYLON.Engine(canvas, true, {
+      antialias: true,
+      preserveDrawingBuffer: true,
+      stencil: true
+    });
 
-	<script>
-        const canvas = document.getElementById("renderCanvas"); // Get the canvas element
-        const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
-        const createScene = function () {
-            // Creates a basic Babylon Scene object
-            const scene = new BABYLON.Scene(engine);
-            // Creates and positions a free camera
-            const camera = new BABYLON.FreeCamera("camera1", 
-                new BABYLON.Vector3(0, 5, -10), scene);
-            // Targets the camera to scene origin
-            camera.setTarget(BABYLON.Vector3.Zero());
-            // This attaches the camera to the canvas
-            camera.attachControl(canvas, true);
-            // Creates a light, aiming 0,1,0 - to the sky
-            const light = new BABYLON.HemisphericLight("light", 
-                new BABYLON.Vector3(0, 1, 0), scene);
-            // Dim the light a small amount - 0 to 1
-            light.intensity = 0.7;
-            // Built-in 'sphere' shape.
-            const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", 
-                {diameter: 2, segments: 32}, scene);
-            // Move the sphere upward 1/2 its height
-            sphere.position.y = 1;
-            // Built-in 'ground' shape.
-            const ground = BABYLON.MeshBuilder.CreateGround("ground", 
-                {width: 6, height: 6}, scene);
-            return scene;
-        };
-        const scene = createScene(); //Call the createScene function
-        // Register a render loop to repeatedly render the scene
-        engine.runRenderLoop(function () {
-                scene.render();
-        });
-        // Watch for browser/canvas resize events
-        window.addEventListener("resize", function () {
-                engine.resize();
-        });
-	</script>
+    const scene = new BABYLON.Scene(engine);
+    scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
-   </body>
+    /*
+     * Camera is deliberately close enough that the can fills the hero
+     * without being clipped.
+     */
+    const camera = new BABYLON.ArcRotateCamera(
+      "duffCamera",
+      -Math.PI / 2,
+      Math.PI / 2,
+      8,
+      new BABYLON.Vector3(0, 0, 0),
+      scene
+    );
 
-</html>
+    camera.lowerRadiusLimit = 8;
+    camera.upperRadiusLimit = 8;
+    camera.lowerBetaLimit = Math.PI / 2;
+    camera.upperBetaLimit = Math.PI / 2;
+    camera.fov = 0.72;
+
+    const ambient = new BABYLON.HemisphericLight(
+      "duffAmbient",
+      new BABYLON.Vector3(0, 1, 0),
+      scene
+    );
+    ambient.intensity = 1.15;
+
+    const key = new BABYLON.DirectionalLight(
+      "duffKey",
+      new BABYLON.Vector3(-0.5, -1, -1),
+      scene
+    );
+    key.position = new BABYLON.Vector3(4, 6, -8);
+    key.intensity = 2.1;
+
+    const rim = new BABYLON.PointLight(
+      "duffRim",
+      new BABYLON.Vector3(-4, 1, 5),
+      scene
+    );
+    rim.intensity = 8;
+
+    /*
+     * Main can body.
+     */
+    const can = BABYLON.MeshBuilder.CreateCylinder(
+      "duffCan",
+      {
+        height: 4.8,
+        diameter: 2.9,
+        tessellation: 128
+      },
+      scene
+    );
+
+    const canMaterial = new BABYLON.StandardMaterial(
+      "duffCanMaterial",
+      scene
+    );
+
+    canMaterial.diffuseColor = new BABYLON.Color3(0.9, 0.03, 0.06);
+    canMaterial.specularColor = new BABYLON.Color3(1, 1, 1);
+    canMaterial.specularPower = 96;
+
+    /*
+     * Duff label texture painted directly onto the cylinder.
+     */
+    const label = new BABYLON.DynamicTexture(
+      "duffLabel",
+      { width: 2048, height: 1024 },
+      scene,
+      true
+    );
+
+    const ctx = label.getContext();
+    const width = 2048;
+    const height = 1024;
+
+    const gradient = ctx.createLinearGradient(0, 0, width, 0);
+    gradient.addColorStop(0, "#65070c");
+    gradient.addColorStop(0.12, "#b20e17");
+    gradient.addColorStop(0.3, "#ed1c24");
+    gradient.addColorStop(0.5, "#ff3940");
+    gradient.addColorStop(0.7, "#ed1c24");
+    gradient.addColorStop(0.88, "#b20e17");
+    gradient.addColorStop(1, "#65070c");
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.strokeStyle = "#111111";
+    ctx.lineWidth = 30;
+
+    ctx.beginPath();
+    ctx.ellipse(
+      width / 2,
+      height / 2 - 25,
+      570,
+      285,
+      0,
+      0,
+      Math.PI * 2
+    );
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = "#111111";
+    ctx.font = "900 300px Arial Black, Arial, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("Duff", width / 2, height / 2 - 55);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "900 124px Arial Black, Arial, sans-serif";
+    ctx.fillText("BEER", width / 2, height / 2 + 220);
+
+    label.update();
+
+    canMaterial.diffuseTexture = label;
+    canMaterial.backFaceCulling = true;
+    can.material = canMaterial;
+
+    /*
+     * Aluminum top and bottom.
+     */
+    const metal = new BABYLON.StandardMaterial("duffMetal", scene);
+    metal.diffuseColor = new BABYLON.Color3(0.72, 0.72, 0.72);
+    metal.specularColor = new BABYLON.Color3(1, 1, 1);
+    metal.specularPower = 128;
+
+    const top = BABYLON.MeshBuilder.CreateCylinder(
+      "duffCanTop",
+      {
+        height: 0.1,
+        diameter: 2.72,
+        tessellation: 128
+      },
+      scene
+    );
+
+    top.position.y = 2.42;
+    top.material = metal;
+
+    const bottom = top.clone("duffCanBottom");
+    bottom.position.y = -2.42;
+
+    /*
+     * Pull tab and opening.
+     */
+    const tab = BABYLON.MeshBuilder.CreateTorus(
+      "duffPullTab",
+      {
+        diameter: 0.82,
+        thickness: 0.1,
+        tessellation: 64
+      },
+      scene
+    );
+
+    tab.position.y = 2.49;
+    tab.rotation.x = Math.PI / 2;
+    tab.scaling.y = 0.52;
+    tab.material = metal;
+
+    const opening = BABYLON.MeshBuilder.CreateCylinder(
+      "duffOpening",
+      {
+        height: 0.03,
+        diameter: 0.48,
+        tessellation: 64
+      },
+      scene
+    );
+
+    opening.position.y = 2.475;
+
+    const openingMaterial = new BABYLON.StandardMaterial(
+      "duffOpeningMaterial",
+      scene
+    );
+
+    openingMaterial.diffuseColor = new BABYLON.Color3(0.02, 0.02, 0.02);
+    opening.material = openingMaterial;
+
+    /*
+     * Everything is grouped together so the complete can spins as one.
+     * One complete revolution takes 16 seconds.
+     */
+    const canParts = [can, top, bottom, tab, opening];
+    const canRoot = new BABYLON.TransformNode("duffCanRoot", scene);
+
+    canParts.forEach((part) => {
+      part.parent = canRoot;
+    });
+
+    let rotation = 0;
+
+    function resize() {
+      engine.resize();
+    }
+
+    /*
+     * The age gate hides #site initially. Resize after it becomes visible.
+     */
+    resize();
+
+    engine.runRenderLoop(() => {
+      rotation += engine.getDeltaTime() * (Math.PI * 2 / 16000);
+      canRoot.rotation.y = rotation;
+      scene.render();
+    });
+
+    window.addEventListener("resize", resize);
+
+    /*
+     * Recalculate the Babylon canvas dimensions after the age gate closes.
+     */
+    requestAnimationFrame(resize);
+    setTimeout(resize, 100);
+  }
+
+  createDuffCan();
+
+  if (site) {
+    const observer = new MutationObserver(createDuffCan);
+    observer.observe(site, {
+      attributes: true,
+      attributeFilter: ["hidden"]
+    });
+  }
+});
