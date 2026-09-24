@@ -232,6 +232,7 @@ button{
   place-items:center;
   width:100%;
   min-height:560px;
+  transform:translateX(-8%);
   perspective:1200px;
   animation:canFloat 3s ease-in-out infinite
 }
@@ -663,6 +664,9 @@ footer a{
     display:flex;
     flex-direction:column;
     align-items:center
+  }
+  .can-stage{
+    transform:translateX(0);
   }
   .can{
     width:210px;
