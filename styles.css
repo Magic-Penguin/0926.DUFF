@@ -230,8 +230,17 @@ button{
   z-index:1;
   display:grid;
   place-items:center;
+  width:100%;
+  min-height:560px;
   perspective:1200px;
   animation:canFloat 3s ease-in-out infinite
+}
+.can-3d{
+  display:block;
+  width:min(560px,48vw);
+  height:min(620px,70vh);
+  min-height:420px;
+  filter:drop-shadow(18px 20px 12px rgba(0,0,0,.22))
 }
 .can{
   width:min(280px,55vw);
@@ -291,13 +300,20 @@ button{
 .can-bottom{
   border-radius:20% 20% 50% 50%
 }
-@keyframes canSpin{
-  from{
-    transform:rotateY(0deg) rotateZ(-1deg)
-  }
-  to{
-    transform:rotateY(360deg) rotateZ(-1deg)
-  }
+.can-fallback{
+  width:min(280px,55vw);
+  height:480px;
+  display:grid;
+  place-items:center;
+  background:#d71920;
+  border:5px solid #111;
+  border-radius:48% / 8%;
+  color:#fff;
+  font-size:clamp(32px,6vw,58px);
+  font-weight:1000;
+  text-align:center;
+  box-shadow:12px 16px 0 rgba(0,0,0,.18);
+  transform:rotate(-2deg)
 }
 @keyframes canFloat{
   50%{
