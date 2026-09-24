@@ -66,7 +66,16 @@ document.addEventListener("DOMContentLoaded", () => {
       new BABYLON.Vector3(-4, 1, 5),
       scene
     );
-    rim.intensity = 8;
+    rim.diffuse = new BABYLON.Color3(1, 0.32, 0.22);
+    rim.intensity = 12;
+
+    const fill = new BABYLON.PointLight(
+      "duffFill",
+      new BABYLON.Vector3(4, 2, -4),
+      scene
+    );
+    fill.diffuse = new BABYLON.Color3(1, 0.65, 0.55);
+    fill.intensity = 7;
 
     /*
      * Main can body.
@@ -86,7 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
       scene
     );
 
-    canMaterial.diffuseColor = new BABYLON.Color3(0.9, 0.03, 0.06);
+    canMaterial.diffuseColor = new BABYLON.Color3(1.0, 0.16, 0.18);
+    canMaterial.emissiveColor = new BABYLON.Color3(0.16, 0.01, 0.015);
     canMaterial.specularColor = new BABYLON.Color3(1, 1, 1);
     canMaterial.specularPower = 96;
 
@@ -145,6 +155,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     label.update();
 
+    // Babylon cylinder UVs wrap the texture in the opposite direction.
+    // Flip the texture horizontally so the Duff lettering reads normally.
+    label.uScale = -1;
+    label.uOffset = 1;
+
     canMaterial.diffuseTexture = label;
     canMaterial.backFaceCulling = true;
     can.material = canMaterial;
@@ -153,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
      * Aluminum top and bottom.
      */
     const metal = new BABYLON.StandardMaterial("duffMetal", scene);
-    metal.diffuseColor = new BABYLON.Color3(0.72, 0.72, 0.72);
+    metal.diffuseColor = new BABYLON.Color3(0.86, 0.86, 0.86);
     metal.specularColor = new BABYLON.Color3(1, 1, 1);
     metal.specularPower = 128;
 
@@ -172,6 +187,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const bottom = top.clone("duffCanBottom");
     bottom.position.y = -2.42;
+
+    const topRim = BABYLON.MeshBuilder.CreateTorus(
+      "duffTopRim",
+      { diameter: 2.68, thickness: 0.055, tessellation: 128 },
+      scene
+    );
+    topRim.position.y = 2.43;
+    topRim.material = metal;
+
+    const bottomRim = topRim.clone("duffBottomRim");
+    bottomRim.position.y = -2.43;
 
     /*
      * Pull tab and opening.
@@ -215,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
      * Everything is grouped together so the complete can spins as one.
      * One complete revolution takes 16 seconds.
      */
-    const canParts = [can, top, bottom, tab, opening];
+    const canParts = [can, top, bottom, topRim, bottomRim, tab, opening];
     const canRoot = new BABYLON.TransformNode("duffCanRoot", scene);
 
     canParts.forEach((part) => {
