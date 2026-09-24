@@ -27,10 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene = new BABYLON.Scene(engine);
     scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
-    /*
-     * Camera is deliberately close enough that the can fills the hero
-     * without being clipped.
-     */
     const camera = new BABYLON.ArcRotateCamera(
       "duffCamera",
       -Math.PI / 2,
@@ -47,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     camera.fov = 0.72;
 
     // Soft studio lighting matched to the site's flat yellow/red/black palette.
-    // Avoiding colored point lights keeps the can from looking pasted into the page.
     const ambient = new BABYLON.HemisphericLight(
       "duffAmbient",
       new BABYLON.Vector3(0, 1, 0),
@@ -74,13 +69,15 @@ document.addEventListener("DOMContentLoaded", () => {
     fill.diffuse = new BABYLON.Color3(1, 0.82, 0.68);
 
     /*
-     * Main can body.
+     * Main body.
+     * A taller, slimmer proportion makes the silhouette read as a classic
+     * beer can rather than a short soft-drink can.
      */
     const can = BABYLON.MeshBuilder.CreateCylinder(
       "duffCan",
       {
-        height: 4.8,
-        diameter: 2.9,
+        height: 5.2,
+        diameter: 2.58,
         tessellation: 128
       },
       scene
@@ -152,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
     label.update();
 
     // Babylon cylinder UVs wrap the texture in the opposite direction.
-    // Flip the texture horizontally so the Duff lettering reads normally.
     label.uScale = -1;
     label.uOffset = 1;
 
@@ -161,7 +157,8 @@ document.addEventListener("DOMContentLoaded", () => {
     can.material = canMaterial;
 
     /*
-     * Aluminum top and bottom.
+     * Aluminum lids are slightly smaller than the body, creating the
+     * unmistakable recessed shoulder of a modern beer can.
      */
     const metal = new BABYLON.StandardMaterial("duffMetal", scene);
     metal.diffuseColor = new BABYLON.Color3(0.86, 0.86, 0.86);
@@ -172,28 +169,46 @@ document.addEventListener("DOMContentLoaded", () => {
       "duffCanTop",
       {
         height: 0.1,
-        diameter: 2.72,
+        diameter: 2.38,
         tessellation: 128
       },
       scene
     );
-
-    top.position.y = 2.42;
+    top.position.y = 2.62;
     top.material = metal;
 
     const bottom = top.clone("duffCanBottom");
-    bottom.position.y = -2.42;
+    bottom.position.y = -2.62;
+
+    const topShoulder = BABYLON.MeshBuilder.CreateTorus(
+      "duffTopShoulder",
+      {
+        diameter: 2.43,
+        thickness: 0.12,
+        tessellation: 128
+      },
+      scene
+    );
+    topShoulder.position.y = 2.56;
+    topShoulder.material = metal;
+
+    const bottomShoulder = topShoulder.clone("duffBottomShoulder");
+    bottomShoulder.position.y = -2.56;
 
     const topRim = BABYLON.MeshBuilder.CreateTorus(
       "duffTopRim",
-      { diameter: 2.68, thickness: 0.055, tessellation: 128 },
+      {
+        diameter: 2.28,
+        thickness: 0.055,
+        tessellation: 128
+      },
       scene
     );
-    topRim.position.y = 2.43;
+    topRim.position.y = 2.68;
     topRim.material = metal;
 
     const bottomRim = topRim.clone("duffBottomRim");
-    bottomRim.position.y = -2.43;
+    bottomRim.position.y = -2.68;
 
     /*
      * Pull tab and opening.
@@ -201,14 +216,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const tab = BABYLON.MeshBuilder.CreateTorus(
       "duffPullTab",
       {
-        diameter: 0.82,
-        thickness: 0.1,
+        diameter: 0.74,
+        thickness: 0.09,
         tessellation: 64
       },
       scene
     );
 
-    tab.position.y = 2.49;
+    tab.position.y = 2.71;
     tab.rotation.x = Math.PI / 2;
     tab.scaling.y = 0.52;
     tab.material = metal;
@@ -217,13 +232,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "duffOpening",
       {
         height: 0.03,
-        diameter: 0.48,
+        diameter: 0.43,
         tessellation: 64
       },
       scene
     );
 
-    opening.position.y = 2.475;
+    opening.position.y = 2.695;
 
     const openingMaterial = new BABYLON.StandardMaterial(
       "duffOpeningMaterial",
@@ -235,9 +250,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
      * Everything is grouped together so the complete can spins as one.
-     * One complete revolution takes 16 seconds.
      */
-    const canParts = [can, top, bottom, topRim, bottomRim, tab, opening];
+    const canParts = [
+      can,
+      top,
+      bottom,
+      topShoulder,
+      bottomShoulder,
+      topRim,
+      bottomRim,
+      tab,
+      opening
+    ];
+
     const canRoot = new BABYLON.TransformNode("duffCanRoot", scene);
 
     canParts.forEach((part) => {
@@ -258,26 +283,25 @@ document.addEventListener("DOMContentLoaded", () => {
       engine.resize();
     }
 
-    /*
-     * The age gate hides #site initially. Resize after it becomes visible.
-     */
     resize();
 
     engine.runRenderLoop(() => {
       const dt = engine.getDeltaTime();
       bounceTime += dt;
 
-      // Dramatic entrance: rise quickly, overshoot, then settle with a small bounce.
       if (!introComplete) {
         const t = Math.min(bounceTime / introDuration, 1);
         const eased = 1 - Math.pow(1 - t, 3);
         const bounce = Math.sin(t * Math.PI * 3) * (1 - t) * 0.55;
         canRoot.position.y = BABYLON.Scalar.Lerp(startY, finalY, eased) + bounce;
 
-        const scale = 0.82 + (0.18 * eased) + (Math.sin(t * Math.PI * 3) * (1 - t) * 0.035);
+        const scale =
+          0.82 +
+          0.18 * eased +
+          Math.sin(t * Math.PI * 3) * (1 - t) * 0.035;
+
         canRoot.scaling.setAll(scale);
 
-        // Begin the 360 while the can is landing so the entrance feels continuous.
         rotation += dt * (Math.PI * 2 / 9000);
 
         if (t >= 1) {
@@ -286,7 +310,6 @@ document.addEventListener("DOMContentLoaded", () => {
           canRoot.scaling.setAll(1);
         }
       } else {
-        // Smooth full 360 rotation after the entrance.
         rotation += dt * (Math.PI * 2 / 12000);
       }
 
@@ -295,10 +318,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener("resize", resize);
-
-    /*
-     * Recalculate the Babylon canvas dimensions after the age gate closes.
-     */
     requestAnimationFrame(resize);
     setTimeout(resize, 100);
   }
