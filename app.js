@@ -2,7 +2,14 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("can3D");
-  if (!canvas || typeof BABYLON === "undefined") return;
+  if (!canvas) return;
+  if (typeof BABYLON === "undefined") {
+    const fallback = document.createElement("div");
+    fallback.className = "can-fallback";
+    fallback.textContent = "DUFF BEER";
+    canvas.replaceWith(fallback);
+    return;
+  }
 
   const engine = new BABYLON.Engine(canvas, true, {
     preserveDrawingBuffer: true,
