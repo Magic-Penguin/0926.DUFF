@@ -243,7 +243,6 @@ document.addEventListener("DOMContentLoaded", () => {
     gl.viewport(0, 0, canvas.width, canvas.height);
   }
 
-  const projection = matrixPerspective(Math.PI / 4.5, canvas.width / canvas.height, 0.1, 100);
   const view = matrixLookAt();
   let angle = 0;
   let last = performance.now();
@@ -257,6 +256,13 @@ document.addEventListener("DOMContentLoaded", () => {
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.enable(gl.DEPTH_TEST);
+
+    const projection = matrixPerspective(
+      Math.PI / 4.5,
+      canvas.width / canvas.height,
+      0.1,
+      100
+    );
 
     gl.useProgram(program);
     gl.uniformMatrix4fv(modelLocation, false, matrixRotateY(angle));
