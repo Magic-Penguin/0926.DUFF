@@ -1,0 +1,26 @@
+CS110 · Week 5 Reflection · Theme selection receipt
+Status: Theme selected
+Theme: Your own story
+Context: Build a small scene or guide from your own setting. Name its genre and show that feeling through type, color, imagery, and interaction. Keep your separate four-stop newcomer recap with the project.
+Receipt ID: CS110-W05-ORIGINAL-7A9D6C44
+Selected: 2026-09-28T23:27:56.941Z
+Requirements version: 2026-09-22.2
+
+R1 · 5A · Explain Week 1–4 to a newcomer
+Create one short visual recap with the four stops in Day 1: mindset and support; story, genre and Visual/Logical/Data hats; HTML/CSS/JavaScript, VS Code, Git/GitHub, the 3D template and the idea of reusable npm packages; browser, name server and server. Use your own words and a diagram, sketch, or screenshot for each stop. Explain at least one class analogy accurately, including how a package can supply reusable code. Read the Week 5 npm analogy; using npm in the app is optional.
+Resource: The package shelf — https://courses.addp2p.com/assignments/cs110/week5/resources/npm-explained.html
+
+R2 · 5A · Plan and start one themed app
+Choose one theme, name your audience and purpose, and use the class whiteboard to map first action to visible result. Start or extend the same CS110 site with HTML, linked CSS and JavaScript. Link to your Week 4 3D view. Commit and push the first checkpoint to your course GitHub repository.
+
+R3 · 5B · Finish the app and 3D connection
+Make one useful JavaScript interaction with a visible result. Adapt one setting, label, or object in the Week 4 3D template to fit your theme. Explain what HTML, CSS, JavaScript and the 3D template each do. Keep the recap and app together in the same repository.
+
+R4 · 5B · Test, revise, and explain on Discord
+Check the app and 3D links, desktop and narrow layout, keyboard access, and browser console. Have a peer use the recap and app; record one unclear part and your revision. In the class Discord, describe your theme, app, one recap analogy, and tested change. Save a link or cropped screenshot of your post. Commit and push the 5B revision.
+
+R5 · WEEK 5 · Submit the final GitHub link and receipt
+Keep the visual recap, app source, 3D page, test note, 5A/5B whiteboard and peer evidence, Discord explanation, and selection receipt in the course GitHub repository. Push the final version and test instructor access. Submit the GitHub URL, working site link, and selection receipt in the CS110 Week 5 Canvas assignment. Both Action Records must be accepted before weekly grading, subject to approved arrangements and accommodations.
+
+Canvas return: https://sbccd.instructure.com/courses/66804/assignments/1897211
+This receipt records a choice and requirements, not completion, attendance, a grade, or submission.
